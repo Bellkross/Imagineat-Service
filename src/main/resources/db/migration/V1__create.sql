@@ -105,7 +105,7 @@ create table if not exists restaurant_rated_by_customer
 (
     restaurant_id bigint       not null,
     customer_id   bigint       not null,
-    point         bigint       not null,
+    point         int       not null,
     comment       varchar(255) not null,
     constraint restaurant_rated_by_user_pk primary key (restaurant_id, customer_id),
     constraint restaurant_rated_by_user_restaurant_fk foreign key (restaurant_id) references restaurant (id),
