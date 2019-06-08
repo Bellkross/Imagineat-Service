@@ -1,0 +1,17 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/imagineat
+    username: postgres
+    password: root
+  flyway:
+    enabled: true
+    url: jdbc:postgresql://localhost:5432/imagineat
+    user: postgres
+    password: root
+  jpa:
+    properties:
+      hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false # fix hibernate bug with a popped up error
