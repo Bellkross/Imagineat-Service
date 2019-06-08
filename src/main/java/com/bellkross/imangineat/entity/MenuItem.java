@@ -1,11 +1,10 @@
 package com.bellkross.imangineat.entity;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name = "menu_item")
 @Getter
@@ -29,4 +28,17 @@ public class MenuItem {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "menu_item_category_id")
     private MenuItemCategory category;
+    @Setter(AccessLevel.PRIVATE)
+    @ManyToMany(mappedBy = "menuItems", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private Set<Dish> dishes = new HashSet<>();
+
+    public void addDish(Dish dish) {
+        dishes.add(dish);
+        dish.getMenuItems().add(this);
+    }
+
+    public void removeDish(Dish dish) {
+        dishes.remove(dish);
+        dish.getMenuItems().remove(this);
+    }
 }

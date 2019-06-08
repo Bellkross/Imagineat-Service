@@ -23,6 +23,10 @@ public class Dish {
     @Column(name = "cl_description")
     private String caloriesDescription;
     @Setter(AccessLevel.PRIVATE)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "menu_item_has_dish", joinColumns = @JoinColumn(name = "dish_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "menu_item_id", referencedColumnName = "id"))
+    private Set<MenuItem> menuItems = new HashSet<>();
+    @Setter(AccessLevel.PRIVATE)
     @ManyToMany(mappedBy = "dishes", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Ingredient> ingredients = new HashSet<>();
 
