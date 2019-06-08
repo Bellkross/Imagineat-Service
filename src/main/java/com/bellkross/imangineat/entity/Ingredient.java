@@ -15,8 +15,8 @@ public class Ingredient {
     @Id
     @EqualsAndHashCode.Include
     private String title;
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @Setter(AccessLevel.PRIVATE)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "dish_has_ingredient", joinColumns = @JoinColumn(name = "ingredient_id", referencedColumnName = "title"), inverseJoinColumns = @JoinColumn(name = "dish_id", referencedColumnName = "id"))
     private Set<Dish> dishes = new HashSet<>();
 }
