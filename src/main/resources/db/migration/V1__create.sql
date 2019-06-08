@@ -1,25 +1,25 @@
-drop table if exists menu_category cascade;
-drop table if exists menu cascade;
-drop table if exists restaurant_has_menu cascade;
-drop table if exists restaurant cascade;
-drop table if exists restaurant_photo cascade;
-drop table if exists restaurant_has_tag cascade;
-drop table if exists restaurant_has_schedule cascade;
-drop table if exists schedule cascade;
-drop table if exists restaurant_rated_by_customer cascade;
-drop table if exists customer cascade;
-drop table if exists restaurant_tag cascade;
-drop table if exists menu_has_menu_item cascade;
-drop table if exists menu_item cascade;
-drop table if exists menu_item_has_tag cascade;
-drop table if exists menu_item_tag cascade;
-drop table if exists menu_item_has_dish cascade;
-drop table if exists dish cascade;
-drop table if exists dish_has_ingredient cascade;
-drop table if exists ingredient cascade;
-drop table if exists menu_item_category cascade;
-drop table if exists menu_item_photo cascade;
-drop table if exists menu_item_model cascade;
+-- drop table if exists menu_category cascade;
+-- drop table if exists menu cascade;
+-- drop table if exists restaurant_has_menu cascade;
+-- drop table if exists restaurant cascade;
+-- drop table if exists restaurant_photo cascade;
+-- drop table if exists restaurant_has_tag cascade;
+-- drop table if exists restaurant_has_schedule cascade;
+-- drop table if exists schedule cascade;
+-- drop table if exists restaurant_rated_by_customer cascade;
+-- drop table if exists customer cascade;
+-- drop table if exists restaurant_tag cascade;
+-- drop table if exists menu_has_menu_item cascade;
+-- drop table if exists menu_item cascade;
+-- drop table if exists menu_item_has_tag cascade;
+-- drop table if exists menu_item_tag cascade;
+-- drop table if exists menu_item_has_dish cascade;
+-- drop table if exists dish cascade;
+-- drop table if exists dish_has_ingredient cascade;
+-- drop table if exists ingredient cascade;
+-- drop table if exists menu_item_category cascade;
+-- drop table if exists menu_item_photo cascade;
+-- drop table if exists menu_item_model cascade;
 
 create table if not exists menu_category
 (
