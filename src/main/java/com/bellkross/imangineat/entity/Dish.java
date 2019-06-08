@@ -1,5 +1,6 @@
 package com.bellkross.imangineat.entity;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,6 +23,7 @@ public class Dish {
     private String gramsDescription;
     @Column(name = "cl_description")
     private String caloriesDescription;
+    @Setter(AccessLevel.PRIVATE)
     @ManyToMany(mappedBy = "dishes")
     private Set<Ingredient> ingredients = new HashSet<>();
 }
