@@ -1,20 +1,19 @@
 package com.bellkross.imangineat.entity;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity
+@Entity(name = "ingredient")
 @Getter
 @Setter
 @NoArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Ingredient {
     @Id
+    @EqualsAndHashCode.Include
     private String title;
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @Setter(AccessLevel.PRIVATE)
