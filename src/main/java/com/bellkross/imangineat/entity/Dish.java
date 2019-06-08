@@ -24,6 +24,16 @@ public class Dish {
     @Column(name = "cl_description")
     private String caloriesDescription;
     @Setter(AccessLevel.PRIVATE)
-    @ManyToMany(mappedBy = "dishes")
+    @ManyToMany(mappedBy = "dishes", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Ingredient> ingredients = new HashSet<>();
+
+    public void addIngredient(Ingredient ingredient) {
+        ingredients.add(ingredient);
+        ingredient.getDishes().add(this);
+    }
+
+    public void removeIngredient(Ingredient ingredient) {
+        ingredients.remove(ingredient);
+        ingredient.getDishes().remove(this);
+    }
 }

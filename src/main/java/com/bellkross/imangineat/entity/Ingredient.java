@@ -16,7 +16,7 @@ import java.util.Set;
 public class Ingredient {
     @Id
     private String title;
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @Setter(AccessLevel.PRIVATE)
     @JoinTable(name = "dish_has_ingredient", joinColumns = @JoinColumn(name = "ingredient_id", referencedColumnName = "title"), inverseJoinColumns = @JoinColumn(name = "dish_id", referencedColumnName = "id"))
     private Set<Dish> dishes = new HashSet<>();
