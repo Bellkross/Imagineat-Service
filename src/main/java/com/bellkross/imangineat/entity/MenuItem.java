@@ -21,10 +21,11 @@ public class MenuItem {
     @Column(name = "second_name")
     private String secondName;
     private String description;
-    @Column(name = "price", nullable = false)
+    @Column(nullable = false)
     private Integer price;
     @Column(name = "currency")
     private String currency;
+
     @Setter(AccessLevel.PRIVATE)
     @OneToMany(mappedBy = "menuItem")
     private Set<MenuItemModel> models = new HashSet<>();
