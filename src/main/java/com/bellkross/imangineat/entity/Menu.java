@@ -16,12 +16,17 @@ public class Menu {
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Setter(AccessLevel.PRIVATE)
     @ManyToMany(mappedBy = "menus", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<MenuItem> items = new HashSet<>();
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "menu_category_id")
     private MenuCategory category;
+    @Setter(AccessLevel.PRIVATE)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "restaurant_has_menu", joinColumns = @JoinColumn(name = "menu_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "restaurant_id", referencedColumnName = "id"))
+    private Set<Restaurant> restaurants = new HashSet<>();
 
     public void addItem(MenuItem item) {
         items.add(item);
