@@ -44,6 +44,9 @@ public class Restaurant {
     @Setter(AccessLevel.PRIVATE)
     @ManyToMany(mappedBy = "restaurants", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Schedule> schedules = new HashSet<>();
+    @Setter(AccessLevel.PRIVATE)
+    @OneToMany(mappedBy = "restaurant")
+    private Set<RestaurantPhoto> photos = new HashSet<>();
 
     public void addTag(RestaurantTag tag) {
         tags.add(tag);
@@ -73,5 +76,15 @@ public class Restaurant {
     public void removeMenu(Schedule schedule) {
         schedules.remove(schedule);
         schedule.getRestaurants().remove(this);
+    }
+
+    public void addPhoto(RestaurantPhoto photo) {
+        photos.add(photo);
+        photo.setRestaurant(this);
+    }
+
+    public void removePhoto(RestaurantPhoto photo) {
+        photos.remove(photo);
+        photo.setRestaurant(null);
     }
 }
