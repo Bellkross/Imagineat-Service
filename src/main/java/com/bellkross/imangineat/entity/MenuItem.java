@@ -25,6 +25,9 @@ public class MenuItem {
     private Integer price;
     @Column(name = "currency")
     private String currency;
+    @Setter(AccessLevel.PRIVATE)
+    @OneToMany(mappedBy = "menuItem")
+    private Set<MenuItemPhoto> photos = new HashSet<>();
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "menu_item_category_id")
     private MenuItemCategory category;
@@ -40,5 +43,15 @@ public class MenuItem {
     public void removeDish(Dish dish) {
         dishes.remove(dish);
         dish.getMenuItems().remove(this);
+    }
+
+    public void addPhoto(MenuItemPhoto photo) {
+        photos.add(photo);
+        photo.setMenuItem(this);
+    }
+
+    public void removePhoto(MenuItemPhoto photo) {
+        photos.remove(photo);
+        photo.setMenuItem(null);
     }
 }
