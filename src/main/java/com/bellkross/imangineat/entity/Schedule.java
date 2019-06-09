@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity(name = "schedule")
+@Table(name = "schedule")
 @Getter
 @Setter
 @NoArgsConstructor

@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity(name = "menu_category")
+@Table(name = "menu_category")
 @Getter
 @Setter
 @NoArgsConstructor

@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity(name = "menu_item_model")
+@Table(name = "menu_item_model")
 @Getter
 @Setter
 @NoArgsConstructor

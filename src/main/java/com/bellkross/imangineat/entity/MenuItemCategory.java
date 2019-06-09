@@ -5,10 +5,12 @@ import lombok.*;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity(name = "menu_item_category")
+@Table(name = "menu_item_category")
 @Getter
 @Setter
 @NoArgsConstructor
