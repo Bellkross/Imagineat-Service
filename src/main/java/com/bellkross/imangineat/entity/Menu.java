@@ -19,6 +19,9 @@ public class Menu {
     @Setter(AccessLevel.PRIVATE)
     @ManyToMany(mappedBy = "menus", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<MenuItem> items = new HashSet<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "menu_category_id")
+    private MenuCategory category;
 
     public void addItem(MenuItem item) {
         items.add(item);
