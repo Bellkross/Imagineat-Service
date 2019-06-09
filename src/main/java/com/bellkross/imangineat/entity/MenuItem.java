@@ -37,6 +37,10 @@ public class MenuItem {
     @Setter(AccessLevel.PRIVATE)
     @ManyToMany(mappedBy = "menuItems", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Dish> dishes = new HashSet<>();
+    @Setter(AccessLevel.PRIVATE)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "menu_has_menu_item", joinColumns = @JoinColumn(name = "menu_item_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "menu_id", referencedColumnName = "id"))
+    private Set<Menu> menus = new HashSet<>();
 
     public void addDish(Dish dish) {
         dishes.add(dish);
