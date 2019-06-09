@@ -38,6 +38,19 @@ public class Restaurant {
     @Setter(AccessLevel.PRIVATE)
     @ManyToMany(mappedBy = "restaurants", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Menu> menus = new HashSet<>();
+    @Setter(AccessLevel.PRIVATE)
+    @ManyToMany(mappedBy = "restaurants", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private Set<RestaurantTag> tags = new HashSet<>();
+
+    public void addTag(RestaurantTag tag) {
+        tags.add(tag);
+        tag.getRestaurants().add(this);
+    }
+
+    public void removeTag(RestaurantTag tag) {
+        tags.remove(tag);
+        tag.getRestaurants().remove(this);
+    }
 
     public void addMenu(Menu menu) {
         menus.add(menu);
