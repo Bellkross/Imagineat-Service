@@ -21,7 +21,7 @@ public class Dish {
     private String title;
     @Column(name = "gr_description")
     private String gramsDescription;
-    @Column(name = "cl_description")
+    @Column(name = "cal_description")
     private String caloriesDescription;
     @Setter(AccessLevel.PRIVATE)
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
