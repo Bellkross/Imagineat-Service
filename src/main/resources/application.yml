@@ -19,3 +19,6 @@ spring:
     rest:
       base-path: /api
       detection-strategy: default
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
