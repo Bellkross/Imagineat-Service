@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RestaurantPhotoRepository extends JpaRepository<RestaurantPhoto, Long> {
+public interface RestaurantPhotoRepository extends JpaRepository<RestaurantPhoto, String> {
 }
