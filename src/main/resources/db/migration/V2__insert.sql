@@ -95,8 +95,6 @@ $$
                 curr_photo_id = curr_photo_id + 1;
                 restaurant_id = restaurant_id + 1;
             end loop;
-        create sequence if not exists restaurant_photo_id_seq start with 1;
-        alter sequence restaurant_photo_id_seq restart with 9;
     end
 $$;
 
@@ -143,5 +141,234 @@ $$
             end loop;
         create sequence if not exists restaurant_has_schedule_id_seq start with 1;
         alter sequence restaurant_has_schedule_id_seq restart with 70;
+    end
+$$;
+
+truncate table menu_category cascade;
+
+do
+$$
+    declare
+        menu_category_id       bigint := 0;
+        title_template         text   := 'category%s';
+        description_template   text   := 'description%s';
+        menu_categories_number bigint := 10;
+    begin
+        while menu_category_id < menu_categories_number
+            loop
+                insert into menu_category (id, title, description)
+                values (menu_category_id,
+                        (select format(title_template, menu_category_id)),
+                        (select format(description_template, menu_category_id)));
+                menu_category_id = menu_category_id + 1;
+            end loop;
+        create sequence if not exists menu_category_id_seq start with 1;
+        alter sequence menu_category_id_seq restart with 10;
+    end
+$$;
+
+truncate table menu cascade;
+
+do
+$$
+    declare
+        menu_id          bigint := 0;
+        menu_category_id bigint := 0;
+        menus_number     bigint := 10;
+    begin
+        while menu_id < menus_number
+            loop
+                insert into menu (id, menu_category_id) values (menu_id, menu_category_id);
+                menu_id = menu_id + 1;
+                menu_category_id = menu_category_id + 1;
+            end loop;
+        create sequence if not exists menu_id_seq start with 1;
+        alter sequence menu_id_seq restart with 10;
+    end
+$$;
+
+truncate table restaurant_has_menu cascade;
+
+do
+$$
+    declare
+        menu_id            bigint := 0;
+        restaurant_id      bigint := 0;
+        menus_number       bigint := 10;
+        restaurants_number bigint := 10;
+    begin
+        while menu_id < menus_number
+            loop
+                while restaurant_id < restaurants_number
+                    loop
+                        insert into restaurant_has_menu (menu_id, restaurant_id) values (menu_id, restaurant_id);
+                        restaurant_id = restaurant_id + 1;
+                    end loop;
+                menu_id = menu_id + 1;
+            end loop;
+        create sequence if not exists restaurant_has_menu_id_seq start with 1;
+        alter sequence restaurant_has_menu_id_seq restart with 100;
+    end
+$$;
+
+truncate table menu_item_category cascade;
+
+do
+$$
+    declare
+        menu_item_category_number bigint := 0;
+        title_template            text   := 'item_category%s';
+        menu_categories_number    bigint := 10;
+    begin
+        while menu_item_category_number < menu_categories_number
+            loop
+                insert into menu_item_category (title)
+                values ((select format(title_template, menu_item_category_number)));
+                menu_item_category_number = menu_item_category_number + 1;
+            end loop;
+    end
+$$;
+
+truncate table menu_item cascade;
+
+do
+$$
+    declare
+        menu_item_id                      bigint := 0;
+        name_template                     text   := 'name%s';
+        second_name_template              text   := 'second_name%s';
+        description_template              text   := 'description%s';
+        my_price                          int    := 100;
+        uah_currency                      text   := 'UAH';
+        menu_item_category_title_template text   := 'item_category%s';
+        menu_items_number                 bigint := 10;
+    begin
+        while menu_item_id < menu_items_number
+            loop
+                insert into menu_item (id, name, second_name, description, price, currency, menu_item_category_id)
+                VALUES (menu_item_id,
+                        (select format(name_template, menu_item_id)),
+                        (select format(second_name_template, menu_item_id)),
+                        (select format(description_template, menu_item_id)),
+                        my_price,
+                        uah_currency,
+                        (select format(menu_item_category_title_template, menu_item_id)));
+                menu_item_id = menu_item_id + 1;
+            end loop;
+        create sequence if not exists menu_item_id_seq start with 1;
+        alter sequence menu_item_id_seq restart with 10;
+    end
+$$;
+
+truncate table menu_item_tag cascade;
+
+do
+$$
+    declare
+        menu_item_tag_id      bigint := 0;
+        title_template        text   := 'title%s';
+        description_template  text   := 'description%s';
+        menu_item_tags_number bigint := 10;
+    begin
+        while menu_item_tag_id < menu_item_tags_number
+            loop
+                insert into menu_item_tag (id, title, description)
+                VALUES (menu_item_tag_id,
+                        (select format(title_template, menu_item_tag_id)),
+                        (select format(description_template, menu_item_tag_id)));
+                menu_item_tag_id = menu_item_tag_id + 1;
+            end loop;
+        create sequence if not exists menu_item_tag_id_seq start with 1;
+        alter sequence menu_item_tag_id_seq restart with 10;
+    end
+$$;
+
+truncate table menu_item_has_tag cascade;
+
+do
+$$
+    declare
+        menu_item_id bigint := 0;
+        tag_id       bigint := 0;
+        menus_number bigint := 10;
+        tags_number  bigint := 10;
+    begin
+        while menu_item_id < menus_number
+            loop
+                while tag_id < tags_number
+                    loop
+                        insert into menu_item_has_tag (menu_item_id, menu_item_tag_id) values (menu_item_id, tag_id);
+                        tag_id = tag_id + 1;
+                    end loop;
+                menu_item_id = menu_item_id + 1;
+            end loop;
+        create sequence if not exists menu_item_has_tag_id_seq start with 1;
+        alter sequence menu_item_has_tag_id_seq restart with 100;
+    end
+$$;
+
+truncate table menu_has_menu_item cascade;
+
+do
+$$
+    declare
+        menu_id           bigint := 0;
+        menu_item_id      bigint := 0;
+        menus_number      bigint := 10;
+        menu_items_number bigint := 10;
+    begin
+        while menu_item_id < menus_number
+            loop
+                while menu_id < menu_items_number
+                    loop
+                        insert into menu_has_menu_item (menu_id, menu_item_id) values (menu_id, menu_item_id);
+                        menu_id = menu_id + 1;
+                    end loop;
+                menu_item_id = menu_item_id + 1;
+            end loop;
+        create sequence if not exists menu_has_menu_item_id_seq start with 1;
+        alter sequence menu_has_menu_item_id_seq restart with 100;
+    end
+$$;
+
+truncate table menu_item_model cascade;
+
+do
+$$
+    declare
+        menu_item_id                  bigint := 0;
+        menu_item_model_id            bigint := 0;
+        menu_item_model_path_template text   := 'mimodel%s';
+        menu_item_models_number       bigint := 10;
+    begin
+        while menu_item_model_id < menu_item_models_number
+            loop
+                insert into menu_item_model (file_path, menu_item_id)
+                values ((select format(menu_item_model_path_template, menu_item_model_id)),
+                        menu_item_id);
+                menu_item_model_id = menu_item_model_id + 1;
+                menu_item_id = menu_item_id + 1;
+            end loop;
+    end
+$$;
+
+truncate table menu_item_photo cascade;
+
+do
+$$
+    declare
+        menu_item_id                  bigint := 0;
+        menu_item_photo_id            bigint := 0;
+        menu_item_photo_path_template text   := 'miphoto%s';
+        menu_item_photos_number       bigint := 10;
+    begin
+        while menu_item_photo_id < menu_item_photos_number
+            loop
+                insert into menu_item_photo (file_path, menu_item_id)
+                values ((select format(menu_item_photo_path_template, menu_item_photo_id)),
+                        menu_item_id);
+                menu_item_photo_id = menu_item_photo_id + 1;
+                menu_item_id = menu_item_id + 1;
+            end loop;
     end
 $$;
