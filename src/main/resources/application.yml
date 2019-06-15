@@ -15,3 +15,7 @@ spring:
       hibernate:
         temp:
           use_jdbc_metadata_defaults: false # fix hibernate bug with a popped up error
+  data:
+    rest:
+      base-path: /api
+      detection-strategy: default
