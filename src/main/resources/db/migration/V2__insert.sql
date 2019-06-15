@@ -70,6 +70,7 @@ $$
                         VALUES (curr_restaurant_id, curr_restaurant_tag_id);
                         curr_restaurant_id = curr_restaurant_id + 1;
                     end loop;
+                curr_restaurant_id = 0;
                 curr_restaurant_tag_id = curr_restaurant_tag_id + 1;
             end loop;
         create sequence if not exists restaurant_has_tag_id_seq start with 1;
@@ -137,6 +138,7 @@ $$
                         VALUES (curr_restaurant_id, curr_schedule_id);
                         curr_restaurant_id = curr_restaurant_id + 1;
                     end loop;
+                curr_restaurant_id = 0;
                 curr_schedule_id = curr_schedule_id + 1;
             end loop;
         create sequence if not exists restaurant_has_schedule_id_seq start with 1;
@@ -204,6 +206,7 @@ $$
                         insert into restaurant_has_menu (menu_id, restaurant_id) values (menu_id, restaurant_id);
                         restaurant_id = restaurant_id + 1;
                     end loop;
+                restaurant_id = 0;
                 menu_id = menu_id + 1;
             end loop;
         create sequence if not exists restaurant_has_menu_id_seq start with 1;
@@ -300,6 +303,7 @@ $$
                         insert into menu_item_has_tag (menu_item_id, menu_item_tag_id) values (menu_item_id, tag_id);
                         tag_id = tag_id + 1;
                     end loop;
+                tag_id = 0;
                 menu_item_id = menu_item_id + 1;
             end loop;
         create sequence if not exists menu_item_has_tag_id_seq start with 1;
@@ -324,6 +328,7 @@ $$
                         insert into menu_has_menu_item (menu_id, menu_item_id) values (menu_id, menu_item_id);
                         menu_id = menu_id + 1;
                     end loop;
+                menu_id = 0;
                 menu_item_id = menu_item_id + 1;
             end loop;
         create sequence if not exists menu_has_menu_item_id_seq start with 1;
