@@ -377,3 +377,96 @@ $$
             end loop;
     end
 $$;
+
+truncate table dish cascade;
+
+do
+$$
+    declare
+        dish_id         bigint := 0;
+        title_template  text   := 'name%s';
+        gr_description  text   := '100 gr';
+        cal_description text   := '200 cal';
+        dishes_number   bigint := 10;
+    begin
+        while dish_id < dishes_number
+            loop
+                insert into dish(id, title, gr_description, cal_description)
+                values (dish_id, title_template, gr_description, cal_description);
+                dish_id = dish_id + 1;
+            end loop;
+        create sequence if not exists dish_id_seq start with 1;
+        alter sequence dish_id_seq restart with 10;
+    end
+$$;
+
+truncate table ingredient cascade;
+
+do
+$$
+    declare
+        ingredient_id      bigint := 0;
+        title_template     text   := 'ingredient%s';
+        ingredients_number bigint := 10;
+    begin
+        while ingredient_id < ingredients_number
+            loop
+                insert into ingredient (title) values ((select format(title_template, ingredient_id)));
+                ingredient_id = ingredient_id + 1;
+            end loop;
+    end
+$$;
+
+truncate table dish_has_ingredient cascade;
+
+do
+$$
+    declare
+        dish_id                   bigint := 0;
+        ingredient_id             bigint := 0;
+        ingredient_title_template text   := 'ingredient%s';
+        dishes_number             bigint := 10;
+        ingredients_number        bigint := 10;
+    begin
+        while dish_id < dishes_number
+            loop
+                while ingredient_id < ingredients_number
+                    loop
+                        insert into dish_has_ingredient (dish_id, ingredient_id)
+                        values (dish_id, (select format(ingredient_title_template, ingredient_id)));
+                        ingredient_id = ingredient_id + 1;
+                    end loop;
+                ingredient_id = 0;
+                dish_id = dish_id + 1;
+            end loop;
+        create sequence if not exists dish_has_ingredient_id_seq start with 1;
+        alter sequence dish_has_ingredient_id_seq restart with 100;
+    end
+$$;
+
+
+truncate table menu_item_has_dish cascade;
+
+do
+$$
+    declare
+        dish_id           bigint := 0;
+        menu_item_id      bigint := 0;
+        dishes_number     bigint := 10;
+        menu_items_number bigint := 10;
+    begin
+        while dish_id < dishes_number
+            loop
+                while menu_item_id < menu_items_number
+                    loop
+                        insert into menu_item_has_dish (dish_id, menu_item_id)
+                        values (dish_id, menu_item_id);
+                        menu_item_id = menu_item_id + 1;
+                    end loop;
+                menu_item_id = 0;
+                dish_id = dish_id + 1;
+            end loop;
+        create sequence if not exists menu_item_has_dish_id_seq start with 1;
+        alter sequence menu_item_has_dish_id_seq restart with 100;
+    end
+$$;
