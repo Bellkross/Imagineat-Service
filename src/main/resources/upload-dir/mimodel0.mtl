@@ -4,6 +4,6 @@ Kd 0.5 0.5 0.5
 Ks 0 0 0
 d 1
 Ns 100
-map_Kd ./First_map0.jpg
-map_Ka ./First_map0.jpg
+map_Kd ./mimodel0.jpg
+map_Ka ./mimodel0.jpg
 
